@@ -9,10 +9,11 @@ class ListsController < ApplicationController
     # 3. データをデータベースに保存するためのsaveメソッド実行
     if @list.save
     # 4. トップ画面へリダイレクト
+      flash[:notice] = "投稿に成功しました。"
       redirect_to list_path(@list.id)
     else
-      @lists = List.all
-      render :index #<= new から indexに変更
+      flash.now[:alert] = "投稿に失敗しました"
+      render :new #<= new から indexに変更
     end
   end
   
